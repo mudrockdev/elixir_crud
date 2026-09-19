@@ -25,10 +25,6 @@ defmodule ElixirCrud.Router do
     only: ~w(_app favicon.svg robots.txt)
   )
 
-  get "/" do
-    send_resp(conn)
-  end
-
   plug(:match)
   plug(:dispatch)
 
