@@ -23,3 +23,5 @@ erl_crash.dump
 elixir_crud-*.tar
 
 .elixir_ls
+
+priv/static

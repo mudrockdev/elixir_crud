@@ -13,9 +13,16 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter(),
+			adapter: adapter({
+				pages: '../../priv/static',
+				assets: '../../priv/static',
+				fallback: '200.html'
+			}),
 			preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
 			extensions: ['.svelte', '.svx', '.md']
 		})
-	]
+	],
+	server: {
+		proxy: { '/api': 'http://localhost:4000' }
+	}
 });

@@ -7,7 +7,11 @@ defmodule ElixirCrud.MixProject do
       version: "0.1.0",
       elixir: "~> 1.20",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: [
+        "assets.build": ["cmd --cd lib/elixir_crud_web bun run build"],
+        "assets.setup": ["cmd --cd lib/elixir_crud_web bun install"]
+      ]
     ]
   end
 
