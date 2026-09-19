@@ -7,14 +7,20 @@ defmodule ElixirCrud.Application do
 
   @impl true
   def start(_type, _args) do
+    # children = [
+    #   # Starts a worker by calling: ElixirCrud.Worker.start_link(arg)
+    #   # {ElixirCrud.Worker, arg}
+    # ]
+
+    require Logger
+
+    port = 4000
+
     children = [
-      # Starts a worker by calling: ElixirCrud.Worker.start_link(arg)
-      # {ElixirCrud.Worker, arg}
+      {Plug.Cowboy, plug: ElixirCrud.Router, scheme: :http, options: [port: port]}
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: ElixirCrud.Supervisor]
-    Supervisor.start_link(children, opts)
+    Logger.info("Server started on http://localhost:#{port}.")
+    Supervisor.start_link(children, strategy: :one_for_one, name: ElixirCrud.Supervisor)
   end
 end
